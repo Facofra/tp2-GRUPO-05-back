@@ -6,14 +6,9 @@ const Usuario = require('./usuario.js')
 const Prestamo = sequelize.define('Prestamo', 
     // columnas
     {
-        id:{
-            type: DataTypes.INTEGER,
-            primaryKey: true,
-            autoIncrement: true,
-            allowNull: false
-        },
         id_ejemplar: {
             type: DataTypes.INTEGER,
+            primaryKey: true,
             allowNull: false
         },
         id_prestatario: {
@@ -23,11 +18,6 @@ const Prestamo = sequelize.define('Prestamo',
         fecha_inicio: {
             type: DataTypes.DATE,
             allowNull: false
-        },        
-        devuelto: {
-            type: DataTypes.BOOLEAN,
-            allowNull: false,
-            defaultValue: false
         },
     }, 
 
@@ -39,7 +29,7 @@ const Prestamo = sequelize.define('Prestamo',
     
 );
 
-Ejemplar.hasMany(Prestamo,{
+Ejemplar.hasOne(Prestamo,{
     foreignKey: 'id_ejemplar',
     sourceKey: 'id'
 });

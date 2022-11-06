@@ -323,81 +323,81 @@ async function create_tables(){
         
         await Prestamo.bulkCreate(
             [{
-                id_ejemplar: 1,
+                id_ejemplar: 20,
                 id_prestatario: 1,
-                fecha_inicio: "2022-05-06 20:54:50",
-                devuelto: false
-              }, {
+                fecha_inicio: "2022-05-06 20:54:50"
+              }, 
+              {
                 id_ejemplar: 2,
                 id_prestatario: 4,
-                fecha_inicio: "2021-08-31 00:16:26",
-                devuelto: false
-              }, {
+                fecha_inicio: "2021-08-31 00:16:26"
+              }, 
+              {
                 id_ejemplar: 3,
                 id_prestatario: 4,
-                fecha_inicio: "2021-02-04 16:28:25",
-                devuelto: true
-              }, {
+                fecha_inicio: "2021-02-04 16:28:25"
+              }, 
+              {
                 id_ejemplar: 4,
                 id_prestatario: 2,
-                fecha_inicio: "2021-11-18 07:45:54",
-                devuelto: false
-              }, {
+                fecha_inicio: "2021-11-18 07:45:54"
+              }, 
+              {
                 id_ejemplar: 5,
                 id_prestatario: 3,
-                fecha_inicio: "2021-07-16 15:37:20",
-                devuelto: false
-              }, {
+                fecha_inicio: "2021-07-16 15:37:20"
+              }, 
+              {
                 id_ejemplar: 6,
                 id_prestatario: 3,
-                fecha_inicio: "2022-03-12 13:10:58",
-                devuelto: true
-              }, {
+                fecha_inicio: "2022-03-12 13:10:58"
+              }, 
+              {
                 id_ejemplar: 7,
                 id_prestatario: 4,
-                fecha_inicio: "2021-04-06 16:55:03",
-                devuelto: true
-              }, {
+                fecha_inicio: "2021-04-06 16:55:03"
+              }, 
+              {
                 id_ejemplar: 8,
                 id_prestatario: 3,
-                fecha_inicio: "2022-01-17 13:10:49",
-                devuelto: false
-              }, {
+                fecha_inicio: "2022-01-17 13:10:49"
+              }, 
+              {
                 id_ejemplar: 9,
                 id_prestatario: 1,
-                fecha_inicio: "2021-02-21 01:55:55",
-                devuelto: false
-              }, {
+                fecha_inicio: "2021-02-21 01:55:55"
+              }, 
+              {
                 id_ejemplar: 10,
                 id_prestatario: 4,
-                fecha_inicio: "2021-02-19 08:25:33",
-                devuelto: false
-              }, {
+                fecha_inicio: "2021-02-19 08:25:33"
+              }, 
+              {
                 id_ejemplar: 11,
                 id_prestatario: 5,
-                fecha_inicio: "2022-03-31 02:35:36",
-                devuelto: false
-              }, {
+                fecha_inicio: "2022-03-31 02:35:36"
+              }, 
+              {
                 id_ejemplar: 12,
                 id_prestatario: 3,
-                fecha_inicio: "2021-08-27 06:21:16",
-                devuelto: true
-              }, {
+                fecha_inicio: "2021-08-27 06:21:16"
+              }, 
+              {
                 id_ejemplar: 13,
                 id_prestatario: 4,
-                fecha_inicio: "2021-07-16 03:21:43",
-                devuelto: true
-              }, {
+                fecha_inicio: "2021-07-16 03:21:43"
+              }, 
+              {
                 id_ejemplar: 14,
                 id_prestatario: 4,
-                fecha_inicio: "2021-09-24 11:03:08",
-                devuelto: false
-              }, {
+                fecha_inicio: "2021-09-24 11:03:08"
+              }, 
+              {
                 id_ejemplar: 15,
                 id_prestatario: 3,
-                fecha_inicio: "2021-08-11 00:04:29",
-                devuelto: true
-              }]
+                fecha_inicio: "2021-08-11 00:04:29"
+              }
+            ]
         );
 
 
