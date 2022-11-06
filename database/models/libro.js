@@ -34,7 +34,7 @@ const Libro = sequelize.define('Libro',
             allowNull: false
         },
         anio: {
-            type: DataTypes.DATE,
+            type: DataTypes.INTEGER,
             allowNull: false
         },
     }, 
