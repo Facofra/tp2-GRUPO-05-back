@@ -1,5 +1,5 @@
-Al principio y cuando se instalen paquetes nuevos
-    1. npm install
+Al principio y cuando se instalen paquetes nuevos:
+1. npm install
 
 
 Una sola vez al principio:
