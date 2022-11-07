@@ -8,6 +8,8 @@ require('dotenv').config()
 
 
 var indexRouter = require('./routes/index');
+var userRouter = require('./routes/user');
+
 
 var app = express();
 
@@ -22,6 +24,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // RUTAS
 app.use('/', indexRouter);
+app.use('/user', userRouter);
 
 
 
