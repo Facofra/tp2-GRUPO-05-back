@@ -1,4 +1,6 @@
+const { where } = require('sequelize')
 const Autor = require('../database/models/autor.js')
+const Editorial = require('../database/models/editorial.js')
 const Ejemplar = require('../database/models/ejemplar.js')
 const Genero = require('../database/models/genero.js')
 const Libro = require('../database/models/libro.js')
@@ -34,6 +36,35 @@ const userController = {
             where: {id_usuario : userId}
         });
         res.json(mis_libros)
+    },
+
+    getDetallesLibro: async function(req, res) {
+
+        let ejemplarId = 1 // obtener id del ejemplar en sesion, esto es placeholder
+
+        // mostrar detalles de libro y poder devolverlo o pedirlo 
+        const detalles_libro = await Ejemplar.findAll({
+            attributes: [],
+             include: [
+                {
+                    model: Libro, required: true, attributes: ["titulo", "sinopsis", "imagen_portada", "anio"],
+                    include: [
+                        {
+                            model: Autor, required: true, attributes: ["nombre"],
+                        },
+                        {
+                            model: Genero, required: true, attributes: ["nombre"],
+                        },
+                        {
+                            model: Editorial, required: true, attributes: ["nombre"],
+                        },
+                    ]
+                }
+            ], 
+            where: {id_ejemplar : ejemplarId}
+        });
+
+        res.json(detalles_libro)
     },
 
     getPrestamos: async function(req, res) {
