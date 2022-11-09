@@ -44,6 +44,34 @@ const userController = {
 
     },
 
+    crearLibro: async function(req, res) {
+
+        // Por ahora esto solo crea entidad LIBRO, pero lo que queremos es crear la entidad ejemplar, y libro solo si no existe de antemano
+
+        if (!(req.body.isbn && req.body.titulo && req.body.id_autor && req.body.id_genero && req.body.id_editorial && req.body.imagen_portada && req.body.anio)) {
+            return res.json({error: "campos incompletos"})
+        }
+
+        let libro = {
+            isbn: req.body.isbn,
+            titulo: req.body.titulo,
+            id_autor: req.body.id_autor,
+            id_genero : req.body.id_genero,
+            id_editorial: req.body.id_editorial,
+            sinopsis: req.body.sinopsis,
+            imagen_portada: req.body.imagen_portada,
+            anio: req.body.anio
+        }
+
+        try {
+            let result = await Libro.create(libro);
+            res.json(result)
+        } catch (error) {
+           return res.json(error) 
+        }
+        
+    },
+
 }
 
 module.exports= userController;
