@@ -52,23 +52,53 @@ const userController = {
             return res.json({error: "campos incompletos"})
         }
 
-        let libro = {
-            isbn: req.body.isbn,
-            titulo: req.body.titulo,
-            id_autor: req.body.id_autor,
-            id_genero : req.body.id_genero,
-            id_editorial: req.body.id_editorial,
-            sinopsis: req.body.sinopsis,
-            imagen_portada: req.body.imagen_portada,
-            anio: req.body.anio
+        let userId = 1; // esto es placeholder, sacar el id del jwt
+
+        let libro_existente;
+        
+        // buscar si ya existe el libro con su isbn
+        try {
+            libro_existente = await Libro.findOne({where: {isbn:req.body.isbn}})
+        } catch (error) {
+            return res.json(error) 
         }
 
-        try {
-            let result = await Libro.create(libro);
-            res.json(result)
-        } catch (error) {
-           return res.json(error) 
+        // crear entidad libro si no existe
+        if (!libro_existente) {
+            let libro = {
+                isbn: req.body.isbn,
+                titulo: req.body.titulo,
+                id_autor: req.body.id_autor,
+                id_genero : req.body.id_genero,
+                id_editorial: req.body.id_editorial,
+                sinopsis: req.body.sinopsis,
+                imagen_portada: req.body.imagen_portada,
+                anio: req.body.anio
+            }
+    
+            try {
+                let result = await Libro.create(libro);
+                console.log("Entidad libro creada: " + result);
+            } catch (error) {
+               return res.json(error) 
+            }
+
         }
+
+        //crear entidad ejemplar
+        try {
+            const ejemplar = await Ejemplar.create(
+                {
+                    id_usuario: userId,
+                    isbn_libro: req.body.isbn
+                }
+            )
+            
+            return res.json()
+        } catch (error) {
+            return res.json(error) 
+        }
+
         
     },
 
