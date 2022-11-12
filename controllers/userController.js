@@ -17,7 +17,7 @@ const userController = {
 
     getPrestamos: async function(req, res) {
 
-        let userId = 1 // obtener id del usuario en sesion, esto es placeholder
+        let userId = req.usuario.id;
 
         // obtener todos los libros que me prestaron
         const libros_prestados = await Prestamo.findAll({
