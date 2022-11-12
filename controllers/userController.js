@@ -61,7 +61,7 @@ const userController = {
                     ]
                 }
             ], 
-            where: {id_ejemplar : ejemplarId}
+            where: {id : ejemplarId}
         });
 
         res.json(detalles_libro)
