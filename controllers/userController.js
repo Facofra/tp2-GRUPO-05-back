@@ -94,13 +94,13 @@ const userController = {
 
     crearLibro: async function(req, res) {
 
-        // Por ahora esto solo crea entidad LIBRO, pero lo que queremos es crear la entidad ejemplar, y libro solo si no existe de antemano
 
+        // comprobar que vengan el body completo
         if (!(req.body.isbn && req.body.titulo && req.body.id_autor && req.body.id_genero && req.body.id_editorial && req.body.imagen_portada && req.body.anio)) {
-            return res.json({error: "campos incompletos"})
+            return res.status(402).json({error: "campos incompletos"})
         }
 
-        let userId = 1; // esto es placeholder, sacar el id del jwt
+        let userId = req.usuario.id;
 
         let libro_existente;
         
@@ -108,7 +108,7 @@ const userController = {
         try {
             libro_existente = await Libro.findOne({where: {isbn:req.body.isbn}})
         } catch (error) {
-            return res.json(error) 
+            return res.status(402).json(error) 
         }
 
         // crear entidad libro si no existe
@@ -128,7 +128,7 @@ const userController = {
                 let result = await Libro.create(libro);
                 console.log("Entidad libro creada: " + result);
             } catch (error) {
-               return res.json(error) 
+               return res.status(402).json(error) 
             }
 
         }
@@ -144,7 +144,7 @@ const userController = {
             
             return res.json()
         } catch (error) {
-            return res.json(error) 
+            return res.status(402).json(error) 
         }
 
         
