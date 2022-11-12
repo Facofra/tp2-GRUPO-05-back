@@ -12,7 +12,8 @@ const Usuario = sequelize.define('Usuario',
         },
         nombre: {
             type: DataTypes.STRING,
-            allowNull: false
+            allowNull: false,
+            unique: true
         },
         contrasenia: {
             type: DataTypes.STRING,
