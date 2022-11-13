@@ -10,9 +10,29 @@ const jwt = require('jsonwebtoken');
 
 
 const userController = {
-    userHome: async function(req, res) {
-        //TODO
-        res.send('user home funcionando');
+
+    getMisLibros: async function(req, res) {
+        let userId = req.usuario.id;
+        
+        // obtener todos mis libros
+        const mis_libros = await Ejemplar.findAll({
+            attributes: [],
+            include: [
+                {
+                    model: Libro, required: true, attributes: ["titulo", "imagen_portada"],
+                },
+                {
+                    model: Prestamo, required: false, attributes: ["fecha_inicio"],
+                    include: [
+                        {
+                            model: Usuario, required: true, attributes: ["nombre"],
+                        }
+                    ],
+                },
+            ],
+            where: {id_usuario : userId}
+        });
+        res.json(mis_libros)
     },
 
     getPrestamos: async function(req, res) {

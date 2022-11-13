@@ -3,6 +3,7 @@ const Ejemplar = require('../database/models/ejemplar.js')
 const Genero = require('../database/models/genero.js')
 const Libro = require('../database/models/libro.js')
 const Prestamo = require('../database/models/prestamo.js')
+const Editorial = require('../database/models/editorial.js')
 
 
 const catalogController = {
@@ -32,6 +33,35 @@ const catalogController = {
 
         res.json(books)
 
+    }, 
+    
+    getDetallesLibro: async function(req, res) {
+
+        let ejemplarId = req.params.id_ejemplar;
+
+        // mostrar detalles de ejemplar y poder devolverlo o pedirlo 
+        const detalles_libro = await Ejemplar.findAll({
+            attributes: [],
+             include: [
+                {
+                    model: Libro, required: true, attributes: ["titulo", "sinopsis", "imagen_portada", "anio"],
+                    include: [
+                        {
+                            model: Autor, required: true, attributes: ["nombre"],
+                        },
+                        {
+                            model: Genero, required: true, attributes: ["nombre"],
+                        },
+                        {
+                            model: Editorial, required: true, attributes: ["nombre"],
+                        },
+                    ]
+                }
+            ], 
+            where: {id : ejemplarId}
+        });
+
+        res.json(detalles_libro)
     },
 }
 

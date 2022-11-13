@@ -5,6 +5,6 @@ const authMiddleware = require('../middlewares/authMiddleware');
 
 
 router.get('/', authMiddleware, catalogController.catalog);
-
+router.get('/detalles_libro/:id_ejemplar',authMiddleware, catalogController.getDetallesLibro);
 
 module.exports = router;
