@@ -37,9 +37,9 @@ const catalogController = {
     
     getDetallesLibro: async function(req, res) {
 
-        let ejemplarId = 1 // obtener id del ejemplar en sesion, esto es placeholder
+        let ejemplarId = req.params.id_ejemplar;
 
-        // mostrar detalles de libro y poder devolverlo o pedirlo 
+        // mostrar detalles de ejemplar y poder devolverlo o pedirlo 
         const detalles_libro = await Ejemplar.findAll({
             attributes: [],
              include: [
