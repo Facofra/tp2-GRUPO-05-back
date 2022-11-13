@@ -12,7 +12,12 @@ client.connect();
 
 
 client.query(`CREATE DATABASE "${process.env.DB_NAME}"`, (err, res) => {
-    console.log(err, res);
+    console.log("\nCreando base de datos, por favor espere...\n");
+    if (err) {
+        console.log(err.message);
+    }else{
+        console.log(`DATABASE ${process.env.DB_NAME} creada con exito`);
+    }
     client.end();
 });
 

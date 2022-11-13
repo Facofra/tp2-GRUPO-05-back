@@ -11,6 +11,7 @@ var indexRouter = require('./routes/index');
 var userRouter = require('./routes/user');
 var catalogRouter = require('./routes/catalog');
 var bookRouter = require('./routes/book');
+var prestamoRouter = require('./routes/prestamo');
 
 
 var app = express();
@@ -29,6 +30,8 @@ app.use('/', indexRouter);
 app.use('/user', userRouter);
 app.use('/catalog', catalogRouter);
 app.use('/book', bookRouter);
+app.use('/prestamo', prestamoRouter);
+
 
 
 
