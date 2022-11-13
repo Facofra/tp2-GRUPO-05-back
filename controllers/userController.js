@@ -60,7 +60,7 @@ const userController = {
             }
             
         } else{
-            return res.json({error: "se debe enviar nombre y contraseña"})
+            return res.status(402).json({error: "se debe enviar nombre y contraseña"})
         }
 
         
@@ -71,7 +71,7 @@ const userController = {
         });
 
         if (! usuario) {
-            return res.json({error:'Usuario y/o contraseña no coinciden'})
+            return res.status(402).json({error:'Usuario y/o contraseña no coinciden'})
         };
 
 
@@ -86,7 +86,7 @@ const userController = {
             res.json({token})
         }
         else{
-            return res.json({error:'Usuario y/o contraseña no coinciden'})
+            return res.status(402).json({error:'Usuario y/o contraseña no coinciden'})
         }
 
         
