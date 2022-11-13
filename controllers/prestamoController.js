@@ -1,16 +1,33 @@
-const Autor = require('../database/models/autor.js')
-const Ejemplar = require('../database/models/ejemplar.js')
-const Genero = require('../database/models/genero.js')
-const Libro = require('../database/models/libro.js')
 const Prestamo = require('../database/models/prestamo.js')
 
+const MaximosPrestamos = 10; // un usuario no puede tener más de 10 libros pedidos
 
 const prestamoController = {
     pedir: async function(req, res) {
-        let id_ejemplar = req.params.id_ejemplar
+        let id_ejemplar = req.params.id_ejemplar;
+        let id_usuario = req.usuario.id;
+
+        const prestamos = await Prestamo.findAll({where: {id_prestatario: id_usuario}})
+        
+        if (prestamos.length >= MaximosPrestamos) {
+            return res.status(400).json({error: "Usuario tiene demasiados libros pedidos: " + MaximosPrestamos})
+        }
+        
+        const libro_prestado = await Prestamo.findOne({where: {id_ejemplar}})
+        
+        if (libro_prestado) {
+            return res.status(400).json({error: "El libro ya está prestado"})
+        }
 
 
-        res.json("endpoint prestamo, id ejemplar: " + id_ejemplar)
+        await Prestamo.create({
+            id_ejemplar,
+            id_prestatario: id_usuario,
+            fecha_inicio: Date()
+        })
+
+
+        res.json("Prestamo realizado con éxito")
 
     },
 }
