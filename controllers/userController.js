@@ -169,7 +169,22 @@ const userController = {
 
         
     },
-
+    
+    borrarLibro: async function(req, res) {
+        let ejemplarId = req.params.id_ejemplar;
+        
+            const row = await Ejemplar.findOne({
+                where: {id : ejemplarId}
+            });
+        
+            if (row) {
+                await row.destroy(); // elimina la row
+                res.status(200).json("ejemplar " + ejemplarId + " eliminado")
+        
+            } else {
+                res.status(422).json("ejemplar inexistente")
+            }
+        },
 }
 
 module.exports= userController;
