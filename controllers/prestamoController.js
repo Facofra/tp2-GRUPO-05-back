@@ -1,4 +1,5 @@
-const Prestamo = require('../database/models/prestamo.js')
+const Prestamo = require('../database/models/prestamo.js');
+const { Op } = require("sequelize");
 
 const MaximosPrestamos = 10; // un usuario no puede tener más de 10 libros pedidos
 
@@ -28,6 +29,32 @@ const prestamoController = {
 
 
         res.json("Prestamo realizado con éxito")
+
+    },
+
+    devolver: async function(req, res) {
+        let id_ejemplar = req.params.id_ejemplar;
+        let id_usuario = req.usuario.id;
+
+        const libro_prestado = await Prestamo.findOne(
+            {
+            where: {
+                [Op.and]: [
+                    { id_ejemplar},
+                    { id_prestatario: id_usuario }
+                ]
+            }
+            })
+        
+        if (! libro_prestado) {
+            return res.status(400).json({error: "El libro no fue encontrado"})
+        }
+
+        await libro_prestado.destroy();
+
+
+
+        res.json("Libro devuelto con éxito")
 
     },
 }
