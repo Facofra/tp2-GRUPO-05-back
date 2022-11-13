@@ -1,4 +1,3 @@
-const { where } = require('sequelize')
 const Autor = require('../database/models/autor.js')
 const Ejemplar = require('../database/models/ejemplar.js')
 const Genero = require('../database/models/genero.js')
