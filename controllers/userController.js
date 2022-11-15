@@ -4,6 +4,7 @@ const Genero = require('../database/models/genero.js')
 const Libro = require('../database/models/libro.js')
 const Prestamo = require('../database/models/prestamo.js')
 const Usuario = require('../database/models/usuario.js')
+const { Op } = require("sequelize");
 
 const bcryptjs = require('bcryptjs');
 const jwt = require('jsonwebtoken');
@@ -172,9 +173,15 @@ const userController = {
     
     borrarLibro: async function(req, res) {
         let ejemplarId = req.params.id_ejemplar;
+        let id_usuario = req.usuario.id;
         
             const row = await Ejemplar.findOne({
-                where: {id : ejemplarId}
+                where: {
+                    [Op.and]: [
+                        { id : ejemplarId},
+                        { id_usuario }
+                    ]
+                    }
             });
         
             if (row) {
