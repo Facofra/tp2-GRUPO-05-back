@@ -4,6 +4,7 @@ const Genero = require('../database/models/genero.js')
 const Libro = require('../database/models/libro.js')
 const Prestamo = require('../database/models/prestamo.js')
 const Usuario = require('../database/models/usuario.js')
+const { Op } = require("sequelize");
 
 const bcryptjs = require('bcryptjs');
 const jwt = require('jsonwebtoken');
@@ -169,7 +170,28 @@ const userController = {
 
         
     },
-
+    
+    borrarLibro: async function(req, res) {
+        let ejemplarId = req.params.id_ejemplar;
+        let id_usuario = req.usuario.id;
+        
+            const row = await Ejemplar.findOne({
+                where: {
+                    [Op.and]: [
+                        { id : ejemplarId},
+                        { id_usuario }
+                    ]
+                    }
+            });
+        
+            if (row) {
+                await row.destroy(); // elimina la row
+                res.status(200).json("ejemplar " + ejemplarId + " eliminado")
+        
+            } else {
+                res.status(422).json("ejemplar inexistente")
+            }
+        },
 }
 
 module.exports= userController;
