@@ -2,6 +2,8 @@ const Autor = require('../database/models/autor.js')
 const Ejemplar = require('../database/models/ejemplar.js')
 const Genero = require('../database/models/genero.js')
 const Libro = require('../database/models/libro.js')
+const Editorial = require('../database/models/editorial.js')
+const { Sequelize } = require("sequelize");
 
 
 const indexController = {
@@ -11,7 +13,7 @@ const indexController = {
             attributes: [],
             include: [
                 {
-                    model: Libro, required: true,  attributes: ["titulo","imagen_portada"],
+                    model: Libro, as:"Libro" , required: true,  attributes: ["titulo","imagen_portada"],
                     include: [
                         {
                             model:Genero, required: true, attributes: ["nombre"]
@@ -19,8 +21,15 @@ const indexController = {
                         {
                             model:Autor, required: true, attributes: ["nombre"]
                         },
+                        {
+                            model:Editorial, required: true, attributes: ["nombre"]
+                        },
                     ]
                 }
+            ],
+            order: [
+                [Sequelize.col('Libro.Autor.nombre')],
+                [Sequelize.col('Libro.titulo')]
             ],
         });
         

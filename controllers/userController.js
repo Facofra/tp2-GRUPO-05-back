@@ -4,7 +4,8 @@ const Genero = require('../database/models/genero.js')
 const Libro = require('../database/models/libro.js')
 const Prestamo = require('../database/models/prestamo.js')
 const Usuario = require('../database/models/usuario.js')
-const { Op } = require("sequelize");
+const Editorial = require('../database/models/editorial.js')
+const { Sequelize,Op } = require("sequelize");
 
 const bcryptjs = require('bcryptjs');
 const jwt = require('jsonwebtoken');
@@ -21,6 +22,17 @@ const userController = {
             include: [
                 {
                     model: Libro, required: true, attributes: ["titulo", "imagen_portada"],
+                    include: [
+                        {
+                            model:Genero, required: true, attributes: ["nombre"]
+                        },
+                        {
+                            model:Autor, required: true, attributes: ["nombre"]
+                        },
+                        {
+                            model:Editorial, required: true, attributes: ["nombre"]
+                        },
+                    ]
                 },
                 {
                     model: Prestamo, required: false, attributes: ["fecha_inicio"],
@@ -31,7 +43,11 @@ const userController = {
                     ],
                 },
             ],
-            where: {id_usuario : userId}
+            where: {id_usuario : userId},
+            order: [
+                [Sequelize.col('Libro.Autor.nombre')],
+                [Sequelize.col('Libro.titulo')]
+            ],
         });
         res.json(mis_libros)
     },
@@ -56,12 +72,19 @@ const userController = {
                                 {
                                     model:Autor, required: true, attributes: ["nombre"]
                                 },
+                                {
+                                    model:Editorial, required: true, attributes: ["nombre"]
+                                },
                             ]
                         }
                     ]
                 }
             ],
-            where: {id_prestatario : userId}
+            where: {id_prestatario : userId},
+            order: [
+                [Sequelize.col('Ejemplar.Libro.Autor.nombre')],
+                [Sequelize.col('Ejemplar.Libro.titulo')]
+            ],
         });
         
         res.json(libros_prestados)
