@@ -4,6 +4,7 @@ const Genero = require('../database/models/genero.js')
 const Libro = require('../database/models/libro.js')
 const Prestamo = require('../database/models/prestamo.js')
 const Editorial = require('../database/models/editorial.js')
+const { Sequelize } = require('sequelize');
 
 
 const catalogController = {
@@ -25,10 +26,17 @@ const catalogController = {
                         {
                             model:Autor, required: true, attributes: ["nombre"]
                         },
+                        {
+                            model:Editorial, required: true, attributes: ["nombre"]
+                        },
                     ]
                 }
             ],
-            where: {"$Prestamo.id_ejemplar$":null}
+            where: {"$Prestamo.id_ejemplar$":null},
+            order: [
+                [Sequelize.col('Libro.Autor.nombre')],
+                [Sequelize.col('Libro.titulo')]
+            ],
         });
 
         res.json(books)
