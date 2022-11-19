@@ -21,7 +21,7 @@ const userController = {
             attributes: [],
             include: [
                 {
-                    model: Libro, required: true, attributes: ["titulo", "imagen_portada"],
+                    model: Libro, required: true, attributes: ["isbn","titulo", "imagen_portada"],
                     include: [
                         {
                             model:Genero, required: true, attributes: ["nombre"]
