@@ -18,7 +18,7 @@ const catalogController = {
                     model: Prestamo, attributes: []
                 },
                 {
-                    model: Libro, required: true,  attributes: ["titulo","imagen_portada"],
+                    model: Libro, required: true,  attributes: ["isbn", "titulo","imagen_portada"],
                     include: [
                         {
                             model:Genero, required: true, attributes: ["nombre"]
@@ -52,7 +52,7 @@ const catalogController = {
             attributes: [],
              include: [
                 {
-                    model: Libro, required: true, attributes: ["titulo", "sinopsis", "imagen_portada", "anio"],
+                    model: Libro, required: true, attributes: ["isbn", "titulo", "sinopsis", "imagen_portada", "anio"],
                     include: [
                         {
                             model: Autor, required: true, attributes: ["nombre"],

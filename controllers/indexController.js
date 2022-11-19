@@ -13,7 +13,7 @@ const indexController = {
             attributes: [],
             include: [
                 {
-                    model: Libro, as:"Libro" , required: true,  attributes: ["titulo","imagen_portada"],
+                    model: Libro, as:"Libro" , required: true,  attributes: ["isbn", "titulo","imagen_portada"],
                     include: [
                         {
                             model:Genero, required: true, attributes: ["nombre"]
