@@ -18,7 +18,7 @@ const userController = {
         
         // obtener todos mis libros
         const mis_libros = await Ejemplar.findAll({
-            attributes: [],
+            attributes: ["id"],
             include: [
                 {
                     model: Libro, required: true, attributes: ["isbn","titulo", "imagen_portada"],
@@ -61,7 +61,7 @@ const userController = {
             attributes: ["fecha_inicio"],
             include: [
                 {
-                    model: Ejemplar, required: true, attributes: ["isbn_libro"],
+                    model: Ejemplar, required: true, attributes: ["id","isbn_libro"],
                     include:[
                         { 
                             model: Libro, required: true,  attributes: ["titulo","imagen_portada"],
