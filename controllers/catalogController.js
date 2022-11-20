@@ -12,7 +12,7 @@ const catalogController = {
 
         // seleccionar solo los libros disponibles, que prestamo sea null
         const books = await Ejemplar.findAll({
-            attributes: [],
+            attributes: ["id"],
             include: [
                 {
                     model: Prestamo, attributes: []
@@ -49,7 +49,7 @@ const catalogController = {
 
         // mostrar detalles de ejemplar y poder devolverlo o pedirlo 
         const detalles_libro = await Ejemplar.findAll({
-            attributes: [],
+            attributes: ["id"],
              include: [
                 {
                     model: Libro, required: true, attributes: ["isbn", "titulo", "sinopsis", "imagen_portada", "anio"],

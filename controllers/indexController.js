@@ -10,7 +10,7 @@ const indexController = {
     index: async function(req, res) {
 
         const books = await Ejemplar.findAll({
-            attributes: [],
+            attributes: ["id"],
             include: [
                 {
                     model: Libro, as:"Libro" , required: true,  attributes: ["isbn", "titulo","imagen_portada"],
