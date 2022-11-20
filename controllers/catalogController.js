@@ -48,26 +48,30 @@ const catalogController = {
         let ejemplarId = req.params.id_ejemplar;
 
         // mostrar detalles de ejemplar y poder devolverlo o pedirlo 
-        const detalles_libro = await Ejemplar.findOne({
-            attributes: ["id"],
-             include: [
-                {
-                    model: Libro, required: true, attributes: ["isbn", "titulo", "sinopsis", "imagen_portada", "anio"],
-                    include: [
-                        {
-                            model: Autor, required: true, attributes: ["nombre"],
-                        },
-                        {
-                            model: Genero, required: true, attributes: ["nombre"],
-                        },
-                        {
-                            model: Editorial, required: true, attributes: ["nombre"],
-                        },
-                    ]
-                }
-            ], 
-            where: {id : ejemplarId}
-        });
+        try {
+            const detalles_libro = await Ejemplar.findOne({
+                attributes: ["id"],
+                include: [
+                    {
+                        model: Libro, required: true, attributes: ["isbn", "titulo", "sinopsis", "imagen_portada", "anio"],
+                        include: [
+                            {
+                                model: Autor, required: true, attributes: ["nombre"],
+                            },
+                            {
+                                model: Genero, required: true, attributes: ["nombre"],
+                            },
+                            {
+                                model: Editorial, required: true, attributes: ["nombre"],
+                            },
+                        ]
+                    }
+                ], 
+                where: {id : ejemplarId}
+            });
+        } catch (error) {
+            return res.status(400).json({error: "el id debe ser numerico"})
+        }
         if (!detalles_libro) {
             return res.status(409).json({error: "id " + ejemplarId + " inexistente"})
         }

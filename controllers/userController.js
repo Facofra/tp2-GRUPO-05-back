@@ -104,7 +104,7 @@ const userController = {
             }
             
         } else{
-            return res.status(402).json({error: "se debe enviar nombre y contraseña"})
+            return res.status(400).json({error: "se debe enviar nombre y contraseña"})
         }
 
         
@@ -115,7 +115,7 @@ const userController = {
         });
 
         if (! usuario) {
-            return res.status(402).json({error:'Usuario y/o contraseña no coinciden'})
+            return res.status(400).json({error:'Usuario y/o contraseña no coinciden'})
         };
 
 
@@ -130,7 +130,7 @@ const userController = {
             res.json({token})
         }
         else{
-            return res.status(402).json({error:'Usuario y/o contraseña no coinciden'})
+            return res.status(400).json({error:'Usuario y/o contraseña no coinciden'})
         }
 
         
@@ -141,7 +141,7 @@ const userController = {
 
         // comprobar que vengan el body completo
         if (!(req.body.isbn && req.body.titulo && req.body.id_autor && req.body.id_genero && req.body.id_editorial && req.body.imagen_portada && req.body.anio)) {
-            return res.status(402).json({error: "campos incompletos"})
+            return res.status(400).json({error: "campos incompletos"})
         }
 
         let userId = req.usuario.id;
@@ -152,7 +152,7 @@ const userController = {
         try {
             libro_existente = await Libro.findOne({where: {isbn:req.body.isbn}})
         } catch (error) {
-            return res.status(402).json(error) 
+            return res.status(409).json(error) 
         }
 
         // crear entidad libro si no existe
@@ -172,7 +172,7 @@ const userController = {
                 let result = await Libro.create(libro);
                 console.log("Entidad libro creada: " + result);
             } catch (error) {
-               return res.status(402).json(error) 
+               return res.status(409).json(error) 
             }
 
         }
@@ -188,7 +188,7 @@ const userController = {
             
             return res.json()
         } catch (error) {
-            return res.status(402).json(error) 
+            return res.status(409).json(error) 
         }
 
         
@@ -198,14 +198,18 @@ const userController = {
         let ejemplarId = req.params.id_ejemplar;
         let id_usuario = req.usuario.id;
         
-        const row = await Ejemplar.findOne({
-            where: {
-                    [Op.and]: [
-                        { id : ejemplarId},
-                        { id_usuario }
-                    ]
+        try {
+            const row = await Ejemplar.findOne({
+                where: {
+                        [Op.and]: [
+                            { id : ejemplarId},
+                            { id_usuario }
+                        ]
                 }
-        });
+            });
+        } catch (error) {
+            return res.status(400).json({error: "el id_ejemplar debe ser numerico"})
+        }
     
         if (row) {
             await row.destroy(); // elimina la row
@@ -234,7 +238,7 @@ const userController = {
             });
         }
         catch (error) {
-            return res.status(402).json({error : "isbn debe ser numerico"}) 
+            return res.status(400).json({error : "isbn debe ser numerico"}) 
         }
         if(!ejemplar_existente) { return res.status(409).json({error : "isbn inexistente"}) }
 
