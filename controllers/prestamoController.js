@@ -11,13 +11,17 @@ const prestamoController = {
         const prestamos = await Prestamo.findAll({where: {id_prestatario: id_usuario}})
         
         if (prestamos.length >= MaximosPrestamos) {
-            return res.status(400).json({error: "Usuario tiene demasiados libros pedidos: " + MaximosPrestamos})
+            return res.status(409).json({error: "Usuario tiene demasiados libros pedidos: " + MaximosPrestamos})
+        }
+        let libro_prestado
+        try {
+            libro_prestado = await Prestamo.findOne({where: {id_ejemplar}})
+        } catch (error) {
+            return res.status(400).json({error: "el id_ejemplar debe ser numerico"})
         }
         
-        const libro_prestado = await Prestamo.findOne({where: {id_ejemplar}})
-        
         if (libro_prestado) {
-            return res.status(400).json({error: "El libro ya está prestado"})
+            return res.status(409).json({error: "El libro ya está prestado"})
         }
 
 
@@ -35,19 +39,25 @@ const prestamoController = {
     devolver: async function(req, res) {
         let id_ejemplar = req.params.id_ejemplar;
         let id_usuario = req.usuario.id;
+        let libro_prestado
+        try {
 
-        const libro_prestado = await Prestamo.findOne(
-            {
-            where: {
-                [Op.and]: [
-                    { id_ejemplar},
-                    { id_prestatario: id_usuario }
-                ]
-            }
+            libro_prestado = await Prestamo.findOne(
+                {
+                where: {
+                    [Op.and]: [
+                        { id_ejemplar},
+                        { id_prestatario: id_usuario }
+                    ]
+                }
             })
+
+        } catch (error) {
+            return res.status(400).json({error: "el id debe ser numerico"})
+        }
         
         if (! libro_prestado) {
-            return res.status(400).json({error: "El libro no fue encontrado"})
+            return res.status(409).json({error: "El libro no fue encontrado"})
         }
 
         await libro_prestado.destroy();
