@@ -222,7 +222,6 @@ const userController = {
         let id_usuario = req.usuario.id;
 
         // verifico que el usuario tenga ese libro
-        console.log(isbn_libro + "         " + id_usuario)
         let ejemplar_existente
         try {
                 ejemplar_existente = await Ejemplar.findOne({
