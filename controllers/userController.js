@@ -198,23 +198,66 @@ const userController = {
         let ejemplarId = req.params.id_ejemplar;
         let id_usuario = req.usuario.id;
         
-            const row = await Ejemplar.findOne({
-                where: {
+        const row = await Ejemplar.findOne({
+            where: {
                     [Op.and]: [
                         { id : ejemplarId},
                         { id_usuario }
                     ]
-                    }
+                }
+        });
+    
+        if (row) {
+            await row.destroy(); // elimina la row
+            res.status(200).json("ejemplar " + ejemplarId + " eliminado")
+    
+        } else {
+            res.status(422).json("ejemplar inexistente")
+        }
+    },
+    
+    // editar un libro que es mio
+    editarLibro: async function(req, res) {
+        let isbn_libro = req.params.isbn_libro;
+        let id_usuario = req.usuario.id;
+
+        // verifico que el usuario tenga ese libro
+        let ejemplar_existente
+        try {
+                ejemplar_existente = await Ejemplar.findOne({
+                where: {
+                    [Op.and]: [
+                        { isbn_libro : isbn_libro },
+                        { id_usuario }
+                    ]
+                }
             });
-        
-            if (row) {
-                await row.destroy(); // elimina la row
-                res.status(200).json("ejemplar " + ejemplarId + " eliminado")
-        
-            } else {
-                res.status(422).json("ejemplar inexistente")
-            }
-        },
+        }
+        catch (error) {
+            return res.status(402).json({error : "isbn debe ser numerico"}) 
+        }
+        if(!ejemplar_existente) { return res.status(409).json({error : "isbn inexistente"}) }
+
+        // modifico
+        const bookUpdated = await Libro.update(
+            {
+                isbn: isbn_libro,   
+                titulo: req.body.titulo,   
+                id_autor: req.body.id_autor,
+                id_genero: req.body.id_genero,
+                id_editorial: req.body.id_editorial,
+                sinopsis: req.body.sinopsis,
+                imagen_portada: req.body.imagen_portada,
+                anio: req.body.anio
+            },
+            {
+                where: { isbn : isbn_libro },
+                returning:true
+            },
+        );
+        return res.status(200).json(bookUpdated[1])
+
+    }
 }
 
 module.exports= userController;
