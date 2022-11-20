@@ -48,7 +48,7 @@ const catalogController = {
         let ejemplarId = req.params.id_ejemplar;
 
         // mostrar detalles de ejemplar y poder devolverlo o pedirlo 
-        const detalles_libro = await Ejemplar.findAll({
+        const detalles_libro = await Ejemplar.findOne({
             attributes: ["id"],
              include: [
                 {
@@ -68,6 +68,9 @@ const catalogController = {
             ], 
             where: {id : ejemplarId}
         });
+        if (!detalles_libro) {
+            return res.status(409).json({error: "id " + ejemplarId + " inexistente"})
+        }
 
         res.json(detalles_libro)
     },
