@@ -178,8 +178,9 @@ const userController = {
         }
 
         //crear entidad ejemplar
+        let ejemplar
         try {
-            const ejemplar = await Ejemplar.create(
+            ejemplar = await Ejemplar.create(
                 {
                     id_usuario: userId,
                     isbn_libro: req.body.isbn
@@ -198,8 +199,9 @@ const userController = {
         let ejemplarId = req.params.id_ejemplar;
         let id_usuario = req.usuario.id;
         
+        let row
         try {
-            const row = await Ejemplar.findOne({
+            row = await Ejemplar.findOne({
                 where: {
                         [Op.and]: [
                             { id : ejemplarId},

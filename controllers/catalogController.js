@@ -48,8 +48,9 @@ const catalogController = {
         let ejemplarId = req.params.id_ejemplar;
 
         // mostrar detalles de ejemplar y poder devolverlo o pedirlo 
+        let detalles_libro
         try {
-            const detalles_libro = await Ejemplar.findOne({
+            detalles_libro = await Ejemplar.findOne({
                 attributes: ["id"],
                 include: [
                     {

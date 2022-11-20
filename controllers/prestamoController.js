@@ -13,8 +13,9 @@ const prestamoController = {
         if (prestamos.length >= MaximosPrestamos) {
             return res.status(409).json({error: "Usuario tiene demasiados libros pedidos: " + MaximosPrestamos})
         }
+        let libro_prestado
         try {
-            const libro_prestado = await Prestamo.findOne({where: {id_ejemplar}})
+            libro_prestado = await Prestamo.findOne({where: {id_ejemplar}})
         } catch (error) {
             return res.status(400).json({error: "el id_ejemplar debe ser numerico"})
         }
@@ -38,10 +39,10 @@ const prestamoController = {
     devolver: async function(req, res) {
         let id_ejemplar = req.params.id_ejemplar;
         let id_usuario = req.usuario.id;
-
+        let libro_prestado
         try {
 
-            const libro_prestado = await Prestamo.findOne(
+            libro_prestado = await Prestamo.findOne(
                 {
                 where: {
                     [Op.and]: [
