@@ -67,7 +67,7 @@ async function create_tables(){
                 id_genero: 5,
                 id_editorial: 3,
                 sinopsis: "in quis justo maecenas rhoncus aliquam lacus morbi",
-                imagen_portada: "sodales",
+                imagen_portada: "1.jpg",
                 anio: 1992
               }, {
                 isbn: 2,
@@ -76,7 +76,7 @@ async function create_tables(){
                 id_genero: 1,
                 id_editorial: 2,
                 sinopsis: "condimentum id luctus nec molestie sed justo",
-                imagen_portada: "urna",
+                imagen_portada: "2.jpg",
                 anio: 1990
               }, {
                 isbn: 3,
@@ -85,7 +85,7 @@ async function create_tables(){
                 id_genero: 1,
                 id_editorial: 3,
                 sinopsis: null,
-                imagen_portada: "aliquam",
+                imagen_portada: "3.jpg",
                 anio: 2003
               }, {
                 isbn: 4,
@@ -94,7 +94,7 @@ async function create_tables(){
                 id_genero: 4,
                 id_editorial: 5,
                 sinopsis: "magnis dis parturient montes nascetur ridiculus mus vivamus vestibulum",
-                imagen_portada: "ut",
+                imagen_portada: "4.jpg",
                 anio: 2009
               }, {
                 isbn: 5,
@@ -103,7 +103,7 @@ async function create_tables(){
                 id_genero: 3,
                 id_editorial: 3,
                 sinopsis: "lacinia nisi venenatis tristique",
-                imagen_portada: "vestibulum",
+                imagen_portada: "5.jpg",
                 anio: 1998
               }, {
                 isbn: 6,
@@ -112,7 +112,7 @@ async function create_tables(){
                 id_genero: 4,
                 id_editorial: 4,
                 sinopsis: "odio cras mi pede malesuada in imperdiet et commodo",
-                imagen_portada: "diam",
+                imagen_portada: "6.jpg",
                 anio: 1994
               }, {
                 isbn: 7,
@@ -121,7 +121,7 @@ async function create_tables(){
                 id_genero: 1,
                 id_editorial: 1,
                 sinopsis: "semper rutrum nulla nunc purus phasellus in felis",
-                imagen_portada: "odio",
+                imagen_portada: "7.jpg",
                 anio: 2003
               }, {
                 isbn: 8,
@@ -130,7 +130,7 @@ async function create_tables(){
                 id_genero: 3,
                 id_editorial: 3,
                 sinopsis: "donec ut dolor morbi vel lectus in quam fringilla rhoncus",
-                imagen_portada: "porta",
+                imagen_portada: "8.jpg",
                 anio: 1985
               }, {
                 isbn: 9,
@@ -139,7 +139,7 @@ async function create_tables(){
                 id_genero: 1,
                 id_editorial: 5,
                 sinopsis: "vitae nisi nam ultrices",
-                imagen_portada: "congue",
+                imagen_portada: "9.jpg",
                 anio: 2010
               }, {
                 isbn: 10,
@@ -148,7 +148,7 @@ async function create_tables(){
                 id_genero: 1,
                 id_editorial: 2,
                 sinopsis: "diam neque vestibulum eget vulputate ut ultrices vel augue",
-                imagen_portada: "sapien",
+                imagen_portada: "10.jpg",
                 anio: 1995
               }, {
                 isbn: 11,
@@ -157,7 +157,7 @@ async function create_tables(){
                 id_genero: 1,
                 id_editorial: 2,
                 sinopsis: "viverra dapibus nulla suscipit ligula",
-                imagen_portada: "ut",
+                imagen_portada: "11.jpg",
                 anio: 2005
               }, {
                 isbn: 12,
@@ -166,7 +166,7 @@ async function create_tables(){
                 id_genero: 4,
                 id_editorial: 3,
                 sinopsis: "congue elementum in hac habitasse",
-                imagen_portada: "ut",
+                imagen_portada: "12.jpg",
                 anio: 1996
               }, {
                 isbn: 13,
@@ -175,7 +175,7 @@ async function create_tables(){
                 id_genero: 2,
                 id_editorial: 4,
                 sinopsis: null,
-                imagen_portada: "duis",
+                imagen_portada: "13.jpg",
                 anio: 2000
               }, {
                 isbn: 14,
@@ -184,7 +184,7 @@ async function create_tables(){
                 id_genero: 5,
                 id_editorial: 1,
                 sinopsis: "scelerisque quam turpis adipiscing lorem",
-                imagen_portada: "rhoncus",
+                imagen_portada: "14.jpg",
                 anio: 1991
               }, {
                 isbn: 15,
@@ -193,7 +193,7 @@ async function create_tables(){
                 id_genero: 5,
                 id_editorial: 5,
                 sinopsis: "magna vestibulum aliquet ultrices erat tortor sollicitudin mi sit amet",
-                imagen_portada: "sit",
+                imagen_portada: "15.jpg",
                 anio: 1991
               }, {
                 isbn: 16,
@@ -202,7 +202,7 @@ async function create_tables(){
                 id_genero: 2,
                 id_editorial: 2,
                 sinopsis: "venenatis non sodales sed tincidunt eu felis fusce",
-                imagen_portada: "cras",
+                imagen_portada: "16.jpg",
                 anio: 1985
               }, {
                 isbn: 17,
@@ -211,7 +211,7 @@ async function create_tables(){
                 id_genero: 2,
                 id_editorial: 1,
                 sinopsis: "blandit lacinia erat vestibulum sed magna at nunc commodo",
-                imagen_portada: "in",
+                imagen_portada: "17.jpg",
                 anio: 1992
               }, {
                 isbn: 18,
@@ -220,7 +220,7 @@ async function create_tables(){
                 id_genero: 5,
                 id_editorial: 1,
                 sinopsis: "id sapien in",
-                imagen_portada: "sapien",
+                imagen_portada: "18.jpg",
                 anio: 1995
               }, {
                 isbn: 19,
@@ -229,7 +229,7 @@ async function create_tables(){
                 id_genero: 2,
                 id_editorial: 1,
                 sinopsis: "potenti in eleifend quam a odio in hac habitasse platea",
-                imagen_portada: "orci",
+                imagen_portada: "19.jpg",
                 anio: 2008
               }, {
                 isbn: 20,
@@ -238,7 +238,7 @@ async function create_tables(){
                 id_genero: 5,
                 id_editorial: 4,
                 sinopsis: null,
-                imagen_portada: "ipsum",
+                imagen_portada: "20.jpg",
                 anio: 1995
               }, {
                 isbn: 21,
@@ -247,7 +247,7 @@ async function create_tables(){
                 id_genero: 2,
                 id_editorial: 3,
                 sinopsis: "habitasse platea dictumst etiam faucibus cursus urna ut tellus nulla",
-                imagen_portada: "vel",
+                imagen_portada: "21.jpg",
                 anio: 1994
               }, {
                 isbn: 22,
@@ -256,7 +256,7 @@ async function create_tables(){
                 id_genero: 2,
                 id_editorial: 3,
                 sinopsis: "nulla ut erat id mauris vulputate elementum nullam varius nulla",
-                imagen_portada: "ultrices",
+                imagen_portada: "22.jpg",
                 anio: 1997
               }, {
                 isbn: 23,
@@ -265,7 +265,7 @@ async function create_tables(){
                 id_genero: 5,
                 id_editorial: 4,
                 sinopsis: "donec dapibus duis at velit eu est",
-                imagen_portada: "nunc",
+                imagen_portada: "23.jpg",
                 anio: 2013
               }, {
                 isbn: 24,
@@ -274,7 +274,7 @@ async function create_tables(){
                 id_genero: 4,
                 id_editorial: 1,
                 sinopsis: "fusce posuere felis sed lacus morbi sem",
-                imagen_portada: "adipiscing",
+                imagen_portada: "24.jpg",
                 anio: 2010
               }, {
                 isbn: 25,
@@ -283,7 +283,7 @@ async function create_tables(){
                 id_genero: 3,
                 id_editorial: 1,
                 sinopsis: "porttitor lacus at",
-                imagen_portada: "orci",
+                imagen_portada: "25.jpg",
                 anio: 1992
               }]
         );
