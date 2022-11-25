@@ -6,6 +6,7 @@ const Prestamo = require('../database/models/prestamo.js')
 const Editorial = require('../database/models/editorial.js')
 const { Sequelize,Op } = require('sequelize');
 const createFilters = require('../utils/createFilters.js')
+const Usuario = require('../database/models/usuario.js')
 
 
 
@@ -78,7 +79,14 @@ const catalogController = {
                                 model: Editorial, required: true, attributes: ["nombre"],
                             },
                         ]
-                    }
+                    },
+                    {
+                        // si viene con fecha de inicio es porque esta prestado
+                        model: Prestamo, required: false, attributes: ["fecha_inicio"], 
+                    },
+                    {
+                        model: Usuario, required: true, attributes: ["nombre"],
+                    }
                 ], 
                 where: {id : ejemplarId}
             });
