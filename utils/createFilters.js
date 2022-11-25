@@ -16,7 +16,6 @@ function createFilters(query){
         throw new TypeError('isbn debe ser numérico')
     } 
 
-    console.log(regIsNumber.test(isbn));
     isbn = Number(isbn)
 
     isbn && filters.push({'$Libro.isbn$': isbn }) 

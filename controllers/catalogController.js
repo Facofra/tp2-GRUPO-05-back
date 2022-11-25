@@ -4,11 +4,23 @@ const Genero = require('../database/models/genero.js')
 const Libro = require('../database/models/libro.js')
 const Prestamo = require('../database/models/prestamo.js')
 const Editorial = require('../database/models/editorial.js')
-const { Sequelize } = require('sequelize');
+const { Sequelize,Op } = require('sequelize');
+const createFilters = require('../utils/createFilters.js')
+
 
 
 const catalogController = {
     catalog: async function(req, res) {
+
+        let filters;
+        try {
+            filters = createFilters(req.query)
+        } catch (error) {
+            return res.status(400).json({error:error.message})
+        }
+
+        filters.push({"$Prestamo.id_ejemplar$":null})
+
 
         // seleccionar solo los libros disponibles, que prestamo sea null
         const books = await Ejemplar.findAll({
@@ -32,7 +44,7 @@ const catalogController = {
                     ]
                 }
             ],
-            where: {"$Prestamo.id_ejemplar$":null},
+            where: {[Op.and]: filters},
             order: [
                 [Sequelize.col('Libro.Autor.nombre')],
                 [Sequelize.col('Libro.titulo')]
