@@ -9,12 +9,23 @@ const { Sequelize,Op } = require("sequelize");
 
 const bcryptjs = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+const createFilters = require('../utils/createFilters.js')
+const createFiltersPrestamo = require('../utils/createFiltersPrestamo.js')
+
 
 
 const userController = {
 
     getMisLibros: async function(req, res) {
         let userId = req.usuario.id;
+
+        let filters;
+        try {
+            filters = createFilters(req.query)
+        } catch (error) {
+            return res.status(400).json({error:error.message})
+        }
+        filters.push({id_usuario : userId})
         
         // obtener todos mis libros
         const mis_libros = await Ejemplar.findAll({
@@ -43,7 +54,7 @@ const userController = {
                     ],
                 },
             ],
-            where: {id_usuario : userId},
+            where: {[Op.and]: filters},
             order: [
                 [Sequelize.col('Libro.Autor.nombre')],
                 [Sequelize.col('Libro.titulo')]
@@ -55,6 +66,15 @@ const userController = {
     getPrestamos: async function(req, res) {
 
         let userId = req.usuario.id;
+
+        let filters;
+        try {
+            filters = createFiltersPrestamo(req.query)
+        } catch (error) {
+            return res.status(400).json({error:error.message})
+        }
+        filters.push({id_prestatario : userId})
+        // filters.unshift({id_prestatario : userId})
 
         // obtener todos los libros que me prestaron
         const libros_prestados = await Prestamo.findAll({
@@ -80,7 +100,8 @@ const userController = {
                     ]
                 }
             ],
-            where: {id_prestatario : userId},
+            where: {[Op.and]: filters},
+            // where: {id_prestatario : userId},
             order: [
                 [Sequelize.col('Ejemplar.Libro.Autor.nombre')],
                 [Sequelize.col('Ejemplar.Libro.titulo')]
