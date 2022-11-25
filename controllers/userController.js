@@ -146,7 +146,7 @@ const userController = {
             // crear y enviar el JWT con el usuario conectado, sin su contraseña
             delete usuario.dataValues.contrasenia
 
-            let token = jwt.sign({ usuario }, process.env.TOKEN_SECRET, {expiresIn: "1h"});
+            let token = jwt.sign({ usuario }, process.env.TOKEN_SECRET, {expiresIn: "10h"});
 
             res.json({token})
         }
