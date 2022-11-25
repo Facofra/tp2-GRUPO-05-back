@@ -82,7 +82,11 @@ const catalogController = {
                     },
                     {
                         // si viene con fecha de inicio es porque esta prestado
-                        model: Prestamo, required: false, attributes: ["fecha_inicio"], 
+                        model: Prestamo, required: false, attributes: ["fecha_inicio","id_prestatario"], 
+                        include: 
+                            {
+                                model: Usuario, required: true, attributes: ["nombre"]
+                            }
                     },
                     {
                         model: Usuario, required: true, attributes: ["nombre"],
