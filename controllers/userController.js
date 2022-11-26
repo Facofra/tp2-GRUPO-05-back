@@ -394,7 +394,7 @@ const userController = {
                 anio: req.body.anio
             },
             {
-                where: { isbn : isbn_libro },
+                where: { isbn : req.body.isbn },
                 returning:true
             },
         );
