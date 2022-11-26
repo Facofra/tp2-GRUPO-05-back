@@ -161,7 +161,7 @@ const userController = {
 
 
         // comprobar que vengan el body completo
-        if (!(req.body.isbn && req.body.titulo && req.body.id_autor && req.body.id_genero && req.body.id_editorial && req.body.imagen_portada && req.body.anio)) {
+        if (!(req.body.isbn && req.body.titulo && req.body.autor && req.body.genero && req.body.editorial && req.body.imagen_portada && req.body.anio)) {
             return res.status(400).json({error: "campos incompletos"})
         }
 
@@ -175,15 +175,77 @@ const userController = {
         } catch (error) {
             return res.status(409).json(error) 
         }
+        
 
         // crear entidad libro si no existe
         if (!libro_existente) {
+            //-------------- buscar si autor existe ------------------------------------------
+            let autor_existente;
+            try {
+                autor_existente = await Autor.findOne({where: {nombre:req.body.autor}})
+            } catch (error) {
+                return res.status(409).json(error) 
+            }
+
+            if (!autor_existente) {
+                let autor = {
+                    nombre:req.body.autor
+                }
+
+                try {
+                    autor_existente = await Autor.create(autor);
+                    console.log("Entidad autor creada: " + autor_existente);
+                } catch (error) {
+                return res.status(409).json(error) 
+                }
+            }
+            // --------------------- fin buscar autor ------------------------------------------
+
+            //-------------- buscar si genero existe ------------------------------------------
+            let genero_existente;
+            try {
+                genero_existente = await Genero.findOne({where: {nombre:req.body.genero}})
+            } catch (error) {
+                return res.status(409).json(error) 
+            }
+
+            if (!genero_existente) {
+                return res.status(409).json({error:"genero no existe"})  
+            }
+            // --------------------- fin buscar genero ------------------------------------------
+
+            //-------------- buscar si editorial existe ------------------------------------------
+            let editorial_existente;
+            try {
+                editorial_existente = await Editorial.findOne({where: {nombre:req.body.editorial}})
+            } catch (error) {
+                return res.status(409).json(error) 
+            }
+
+            if (!editorial_existente) {
+                let editorial = {
+                    nombre:req.body.editorial
+                }
+
+                try {
+                    editorial_existente = await Editorial.create(editorial);
+                    console.log("Entidad editorial creada: " + editorial_existente);
+                } catch (error) {
+                return res.status(409).json(error) 
+                }
+            }
+            // --------------------- fin buscar editorial ------------------------------------------
+
+
+
+
+
             let libro = {
                 isbn: req.body.isbn,
                 titulo: req.body.titulo,
-                id_autor: req.body.id_autor,
-                id_genero : req.body.id_genero,
-                id_editorial: req.body.id_editorial,
+                id_autor: autor_existente.id,
+                id_genero : genero_existente.id,
+                id_editorial: editorial_existente.id,
                 sinopsis: req.body.sinopsis,
                 imagen_portada: req.body.imagen_portada,
                 anio: req.body.anio
@@ -197,6 +259,17 @@ const userController = {
             }
 
         }
+
+
+
+
+
+
+
+
+
+
+
 
         //crear entidad ejemplar
         let ejemplar
