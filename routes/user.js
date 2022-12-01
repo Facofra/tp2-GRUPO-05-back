@@ -39,6 +39,6 @@ router.get('/mis_libros', authMiddleware,  userController.getMisLibros);
 router.get('/mis_prestamos', authMiddleware ,userController.getPrestamos);
 router.post('/crear_libro',authMiddleware , upload.single('imageFile'), userController.crearLibro);
 router.delete('/borrar_libro/:id_ejemplar',authMiddleware, userController.borrarLibro);
-router.put('/editar_libro/:isbn_libro',authMiddleware, userController.editarLibro);
+router.put('/editar_libro/:isbn_libro',authMiddleware, upload.single('imageFile'), userController.editarLibro);
 
 module.exports = router;

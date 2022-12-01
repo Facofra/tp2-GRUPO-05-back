@@ -318,10 +318,22 @@ const userController = {
     editarLibro: async function(req, res) {
 
         // comprobar que vengan el body completo
-        if (!(req.body.isbn && req.body.titulo && req.body.autor && req.body.genero && req.body.editorial && req.body.imagen_portada && req.body.anio)) {
+        if (!(req.body.isbn && req.body.titulo && req.body.autor && req.body.genero && req.body.editorial && req.body.anio)) {
             return res.status(400).json({error: "campos incompletos"})
         }
 
+        let libro_existente;
+        try {
+            libro_existente = await Libro.findByPk(req.params.isbn_libro);
+        } catch (error) {
+            return res.status(409).json("isbn no es numerico") 
+        }
+        
+        if (!libro_existente) {
+            return res.status(409).json("Libro no existe") 
+        }
+        
+        
         //-------------- buscar si autor existe ------------------------------------------
         let autor_existente;
         try {
@@ -390,7 +402,7 @@ const userController = {
                 id_genero : genero_existente.id,
                 id_editorial: editorial_existente.id,
                 sinopsis: req.body.sinopsis,
-                imagen_portada: req.body.imagen_portada,
+                imagen_portada: req.file ? req.file.filename : libro_existente.imagen_portada,
                 anio: req.body.anio
             },
             {
