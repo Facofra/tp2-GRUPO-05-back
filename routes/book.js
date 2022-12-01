@@ -7,7 +7,7 @@ router.get('/autores', bookController.getAutores);
 router.get('/generos', bookController.getGeneros);
 router.get('/editoriales', bookController.geteditoriales);
 router.get('/isbns', bookController.getIsbns);
-router.get('/imagen/:isbn', bookController.getImagen);
+router.get('/imagen/:filename', bookController.getImagen);
 
 
 module.exports = router;

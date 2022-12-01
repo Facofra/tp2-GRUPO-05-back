@@ -160,7 +160,7 @@ const userController = {
     crearLibro: async function(req, res) {
 
         // comprobar que vengan el body completo
-        if (!(req.body.isbn && req.body.titulo && req.body.autor && req.body.genero && req.body.editorial && req.body.imagen_portada && req.body.anio)) {
+        if (!(req.body.isbn && req.body.titulo && req.body.autor && req.body.genero && req.body.editorial && req.body.anio && req.file)) {
             return res.status(400).json({error: "campos incompletos"})
         }
 
@@ -246,7 +246,7 @@ const userController = {
                 id_genero : genero_existente.id,
                 id_editorial: editorial_existente.id,
                 sinopsis: req.body.sinopsis,
-                imagen_portada: req.body.imagen_portada,
+                imagen_portada: req.file ? req.file.filename : null,
                 anio: req.body.anio
             }
     
