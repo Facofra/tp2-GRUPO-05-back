@@ -2,6 +2,7 @@ const Autor = require('../database/models/autor.js')
 const Editorial = require('../database/models/editorial.js')
 const Genero = require('../database/models/genero.js')
 const Libro = require('../database/models/libro.js')
+const path = require('path')
 
 
 const bookController = {
@@ -36,6 +37,14 @@ const bookController = {
             attributes: ["isbn"]
         })
         res.json(isbns)
+    },
+
+    getImagen: async function(req, res) {
+        const isbn = req.params.isbn
+        res.sendFile(isbn+ ".jpg" , {root:path.join(__dirname, '../imagenes_portadas/')})
+        
+        
+
     },
 }
 
