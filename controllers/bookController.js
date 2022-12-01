@@ -40,8 +40,8 @@ const bookController = {
     },
 
     getImagen: async function(req, res) {
-        const isbn = req.params.isbn
-        res.sendFile(isbn+ ".jpg" , {root:path.join(__dirname, '../imagenes_portadas/')})
+        const filename = req.params.filename
+        res.sendFile(filename , {root:path.join(__dirname, '../imagenes_portadas/')})
         
         
 
